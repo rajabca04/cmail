@@ -25,7 +25,7 @@ $user= getuser();
             <a href="" class="navbar-brand">Cmail</a>
 
             <form action="" class="d-flex mx-auto">
-                <input type="text" name="search" placeholder="search your mail..." class="form-control" size="70" style="border-radus:0px;">
+                <input type="text" name="search" placeholder="search your mail..." class="form-control" size="70" style="border-radius: 0px;">
                 <input type="submit" name="find" value="Search"  class="btn btn-outline-danger"style="margin-left:-74px;">           
             </form>
             <ul class="navbar-nav">
@@ -88,8 +88,6 @@ $user= getuser();
                 <hr class="m-2">
                 <?php endif;?>
             <?php endwhile;?>
-            
-
         </div> 
 
         
