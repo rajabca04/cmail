@@ -62,7 +62,9 @@ $user= getuser();
                     </div>
             </div> 
         <div class="col-lg-10">
-            <?php  
+            <?php
+            
+            
             $user_id = getuser();
             $id  = $user_id['id'];
             $calling = mysqli_query($connect,"select * from mail JOIN accounts ON mail.send_by=accounts.id where send_to='$id'");
@@ -74,7 +76,7 @@ $user= getuser();
                 <div class="row">
 
                     <div class="col-1"><input type="checkbox"></div>
-                    <div class="col-1"><a href=""><b><?= $x['name'] ?></b></a></div>
+                    <div class="col-1"><a href=""><b><?= $x['name']?></b></a></div>
                     <div class="col-2 font-weight-bold" style="color:red;"><?= $x['subject'] ?></div>
                     <div class="col"style="color:dark;" ><?= $x['body'] ?></div>
 
