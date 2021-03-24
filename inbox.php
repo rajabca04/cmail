@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <?php
 include "config.php";
-
 if(!isset($_SESSION['user'])){
     redirect('account');
-
 }
-
 $user= getuser();
 
 ?>
@@ -53,54 +50,48 @@ $user= getuser();
 
                     <?php include "compose_form.php" ?>
 
-                    <div class="list-group list-group-flush ">
-                    <a href="main.php" class="list-group-item list-group-item-action">inbox</a>
+                    <div class="list-group list-group-flush">
+                        <a href="main.php" class="list-group-item list-group-item-action">inbox</a>
                         <a href="sentmail.php" class="list-group-item list-group-item-action">sent mail</a>
-                       <a href="" class="list-group-item list-group-item-action">draft</a>
+                        <a href="" class="list-group-item list-group-item-action">draft</a>
                         <a href="" class="list-group-item list-group-item-action">trash</a>
                         <a href="logout.php" class="list-group-item list-group-item-action bg-danger text-white">Logout</a>
-                    </div>
+                </div>
             </div> 
-        <div class="col-lg-10">
-            <?php
-            
-            
+            <div class="col-lg-10">
+            <?php  
             $user_id = getuser();
             $id  = $user_id['id'];
             $calling = mysqli_query($connect,"select * from mail JOIN accounts ON mail.send_by=accounts.id where send_to='$id'");
-            // showing deleted data from 'inbox.php' file. 
-            $show_t = mysqli_query($connect,"SELECT FROM mail WHERE m_id = 1 ");
-            //echo $show_t;
-             
+            //showing all data of inbox.php file , recived from mail.
+            $show_i = mysqli_query($connect,"SELECT FROM mail WHERE m_id = 0");
+            //echo $show_i;
+            
             while($x = mysqli_fetch_array($calling)):?>
+                <?php $addr=$x['m_id'];
+                if($addr=0):?>
                 <div class="row">
-
                     <div class="col-1"><input type="checkbox"></div>
-                    <div class="col-1"><a href=""><b><?= $x['name']?></b></a></div>
+                    <div class="col-1"><a href=""><b><?= $x['name'] ?></b></a></div>
                     <div class="col-2 font-weight-bold" style="color:red;"><?= $x['subject'] ?></div>
                     <div class="col"style="color:dark;" ><?= $x['body'] ?></div>
 
+                    <div class="col-1 float-end"><a href="main.php?update=<?= $addr=$x['m_id'];?>" class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+</svg></a></div>
+<?php echo $addr; ?>
                 </div>
                 <hr class="m-2">
+                <?php endif;?>
             <?php endwhile;?>
-        
-
         </div> 
+
         
-           
     </div>
+
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>  
 
 </body>
 </html>
-
-<?php 
-if(isset($_GET['update'])){
-    $id = $_GET['update'];
-
-    $query = mysqli_query($connect,"update mail set status=1 where m_id='$id'");
-    redirect("main");
-    
-}
-?>

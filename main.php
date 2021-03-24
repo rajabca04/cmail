@@ -54,7 +54,7 @@ $user= getuser();
                     <?php include "compose_form.php" ?>
 
                     <div class="list-group list-group-flush ">
-                    <a href="main.php" class="list-group-item list-group-item-action">inbox</a>
+                    <a href="inbox.php" class="list-group-item list-group-item-action">inbox</a>
                         <a href="sentmail.php" class="list-group-item list-group-item-action">sent mail</a>
                        <a href="" class="list-group-item list-group-item-action">draft</a>
                         <a href="trash.php" class="list-group-item list-group-item-action">trash</a>
