@@ -1,4 +1,5 @@
-<?php include "config.php" ?>
+
+<?php include "config.php" ?>  // here just include config.php file into index.php file.
 
 <!DOCTYPE html>
 <html lang="en">
